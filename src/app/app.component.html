@@ -1,50 +1,30 @@
 <div class="container">
   <div class="columns is-centered">
     <div class="box column is-one-third">
-      <h1 class="title has-text-centered">Password Generator</h1>
+      <h1 class="title has-text-centered">Text Generator</h1>
 
-      <div class="field">
-        <label>Length</label>
-        <input class="input" (input)="onEnterLength($event)" />
-      </div>
-
-      <div class="field">
-        <div class="control">
-          <label class="checkbox">
-            <input (change)="onChangeUseLetters()" type="checkbox" />
-            Use Letters
-          </label>
+      <div class="box">
+        <label>The Text</label>
+        <div class="has-text-centered">
+          <span *ngFor="let letter of randomSentence.split('');let i = index"
+                [class]="letterMatches(letter, userString[i])">{{letter}}</span>
         </div>
       </div>
 
-      <div class="field">
-        <div class="control">
-          <label class="checkbox">
-            <input (change)="onChangeUseNumbers()" type="checkbox" />
-            Use Numbers
-          </label>
-        </div>
+      <div class="box">
+        <label>Your Text</label>
+        <input class="input" (input)="onUserInput($event)" />
+        <p>{{ userString }}</p>
       </div>
 
-      <div class="field">
-        <div class="control">
-          <label class="checkbox">
-            <input (change)="onChangeUseSymbols()" type="checkbox" />
-            Use Symbols
-          </label>
-        </div>
+      <div class="box" *ngIf="textMatch">
+        <h2 class="title has-text-centered has-text-success">You Won!</h2>
       </div>
 
-      <button [disabled]="
-          !(length && (includeLetters || includeSymbols || includeNumbers))
-        " (click)="onButtonClick()" class="button is-link is-fullwidth">
-        Generate!
-      </button>
-
-      <div class="box" *ngIf="password">
-        <label>Your Password</label>
-        <input class="input" [value]="password" />
+      <div class="box" *ngIf="!textMatch">
+        <h2 class="title has-text-centered has-background-warning">Texts should match!</h2>
       </div>
+
     </div>
   </div>
 </div>

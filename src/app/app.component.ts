@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {lorem} from 'faker';
 
 @Component({
   selector: 'app-root',
@@ -6,57 +7,30 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  includeLetters = false;
-  includeNumbers = false;
-  includeSymbols = false;
-  length: number;
-  password = '';
+  randomSentence: string;
+  userString = '';
+  textMatch: boolean;
 
-  onEnterLength(event: Event) {
-    const valueAsInt = +(event.target as HTMLInputElement).value;
-    if (!isNaN(valueAsInt)) {
-      this.length = valueAsInt;
-    }
+
+ constructor() {
+   console.log(this.randomSentence);
+   this.randomSentence = lorem.sentence();
+ }
+
+  onUserInput(thisEvent: Event) {
+    this.userString = (thisEvent.target as HTMLInputElement).value;
+    this.textMatches();
   }
 
-  onChangeUseLetters() {
-    this.includeLetters = !this.includeLetters;
+  textMatches() {
+   this.textMatch = this.randomSentence === this.userString;
   }
 
-  onButtonClick() {
-    const numbers = '1234567890';
-    const letters = 'abcdefghijklmnopqrstuvwxyz';
-    const symbols = '!@#$%^&*()_{}":<>?+_';
 
-    let validChars = '';
-
-    if (this.includeLetters) {
-      validChars += letters;
-    }
-    if (this.includeNumbers) {
-      validChars += numbers;
-    }
-    if (this.includeSymbols) {
-      validChars += symbols;
-    }
-
-    let generatedPassword = '';
-    for (let i = 0; i < this.length; i++) {
-      const index = Math.floor(Math.random() * validChars.length);
-      generatedPassword += validChars[index];
-    }
-    this.password = generatedPassword;
-  }
-
-  onChangeUseNumbers() {
-    this.includeNumbers = !this.includeNumbers;
-  }
-
-  onChangeUseSymbols() {
-    this.includeSymbols = !this.includeSymbols;
-  }
-
-  canGenerate() {
-    return !(this.length && (this.includeSymbols || this.includeNumbers || this.includeLetters));
+  letterMatches(letter: string, userStringLetter: string) {
+    if ( !userStringLetter) {
+       return 'pending';
+     }
+    return letter === userStringLetter ? 'correct' : 'incorrect';
   }
 }
