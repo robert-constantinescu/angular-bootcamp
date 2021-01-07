@@ -6,57 +6,78 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  includeLetters = false;
-  includeNumbers = false;
-  includeSymbols = false;
-  length: number;
-  password = '';
 
-  onEnterLength(event: Event) {
-    const valueAsInt = +(event.target as HTMLInputElement).value;
-    if (!isNaN(valueAsInt)) {
-      this.length = valueAsInt;
+  currentPage = 0;
+
+  images = [
+    {
+      title: 'The Beach',
+      url: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2h8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'The Time',
+      url: 'https://images.unsplash.com/photo-1518281361980-b26bfd556770?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8dGltZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'A Children',
+      url: 'https://images.unsplash.com/photo-1584367369853-8b966cf223f4?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNoaWxkcmVufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'A Sign',
+      url: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8Z3Jvd3RofGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'The Beach',
+      url: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2h8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'The Time',
+      url: 'https://images.unsplash.com/photo-1518281361980-b26bfd556770?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8dGltZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'A Children',
+      url: 'https://images.unsplash.com/photo-1584367369853-8b966cf223f4?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNoaWxkcmVufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'A Sign',
+      url: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8Z3Jvd3RofGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'The Beach',
+      url: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2h8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'The Time',
+      url: 'https://images.unsplash.com/photo-1518281361980-b26bfd556770?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8dGltZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'A Children',
+      url: 'https://images.unsplash.com/photo-1584367369853-8b966cf223f4?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNoaWxkcmVufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'A Sign',
+      url: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8Z3Jvd3RofGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'The Beach',
+      url: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2h8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'The Time',
+      url: 'https://images.unsplash.com/photo-1518281361980-b26bfd556770?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8dGltZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'A Children',
+      url: 'https://images.unsplash.com/photo-1584367369853-8b966cf223f4?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNoaWxkcmVufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+    },
+    {
+      title: 'A Sign',
+      url: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8Z3Jvd3RofGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
     }
-  }
+  ];
 
-  onChangeUseLetters() {
-    this.includeLetters = !this.includeLetters;
-  }
 
-  onButtonClick() {
-    const numbers = '1234567890';
-    const letters = 'abcdefghijklmnopqrstuvwxyz';
-    const symbols = '!@#$%^&*()_{}":<>?+_';
-
-    let validChars = '';
-
-    if (this.includeLetters) {
-      validChars += letters;
-    }
-    if (this.includeNumbers) {
-      validChars += numbers;
-    }
-    if (this.includeSymbols) {
-      validChars += symbols;
-    }
-
-    let generatedPassword = '';
-    for (let i = 0; i < this.length; i++) {
-      const index = Math.floor(Math.random() * validChars.length);
-      generatedPassword += validChars[index];
-    }
-    this.password = generatedPassword;
-  }
-
-  onChangeUseNumbers() {
-    this.includeNumbers = !this.includeNumbers;
-  }
-
-  onChangeUseSymbols() {
-    this.includeSymbols = !this.includeSymbols;
-  }
-
-  canGenerate() {
-    return !(this.length && (this.includeSymbols || this.includeNumbers || this.includeLetters));
+  checkWindowIndex(index: number) {
+    return Math.abs(this.currentPage - index) < 5;
   }
 }
