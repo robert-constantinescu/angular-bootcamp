@@ -14,6 +14,9 @@ const routes: Routes = [
       () => import('./collections/collections.module')
         .then(theModule => theModule.CollectionsModule)
   },
+  {path: 'views',
+    loadChildren: () => import('./views/views.module')
+      .then(theModule => theModule.ViewsModule)},
   {path: '', component: HomeComponent},
   {path: '**', component: NotFoundComponent}
   ];
