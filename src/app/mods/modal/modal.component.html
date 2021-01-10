@@ -1,0 +1,14 @@
+<div class="ui dimmer visible active" (click)="onCloseModal()">
+  <div class="ui modal visible active" (click)="$event.stopPropagation()">
+    <i class="close icon" (click)="onCloseModal()"></i>
+    <div class="header">
+      MODAL WINDOW!
+    </div>
+    <div class="content">
+      <p>CONTENT FOR THE MODAL WINDOW</p>
+    </div>
+    <div class="actions">
+      <button class="ui button" (click)="onCloseModal()">Ok</button>
+    </div>
+  </div>
+</div>
