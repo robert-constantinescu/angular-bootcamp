@@ -16,6 +16,11 @@ export class AccordionComponent implements OnInit {
   }
 
   updateIndex(i: number) {
-    this.openedItemIndex = i;
+    if (i === this.openedItemIndex) {
+      this.openedItemIndex = -1;
+    } else {
+      this.openedItemIndex = i;
+    }
   }
 }
+
