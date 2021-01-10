@@ -1,0 +1,4 @@
+:host:not(:first-of-type) { /* this says: apply this only to elements that are not first in the component*/
+  display: block;
+  margin-top: 20px;
+}
