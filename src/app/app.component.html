@@ -1,2 +1,4 @@
-<app-search-bar (submitSearch)="onSubmitSearch($event)"></app-search-bar>
-<app-page-list></app-page-list>
+<div class="container">
+  <app-search-bar (submitSearch)="onSubmitSearch($event)"></app-search-bar>
+  <app-page-list *ngIf="pagesWikipedia.length" [pages]="pagesWikipedia"></app-page-list>
+</div>

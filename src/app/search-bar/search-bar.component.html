@@ -1,4 +1,10 @@
-<form (submit)="onFormSubmit($event)" >
-  <input (input)="onNewInput($event)"/>
-  <!--<input (input)="searchTerm = $event.target.value"/>  equivalent with what is above-->
-</form>
+<div class="box">
+  <form (submit)="onFormSubmit($event)" >
+    <input
+      class="input"
+      placeholder="Search Term"
+      (input)="onNewInput($event)"
+    />
+    <!--<input (input)="searchTerm = $event.target.value"/>  equivalent with what is above-->
+  </form>
+</div>
