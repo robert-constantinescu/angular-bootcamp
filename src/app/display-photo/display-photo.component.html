@@ -1,0 +1,10 @@
+<div class="ui grid">
+  <div>
+    <button (click)="getRandomPhoto()" class="ui primary button">Get Photo!</button>
+  </div>
+  <div class="three column row">
+    <div class="column">
+      <img  *ngIf="photoUrl" [src]="photoUrl" class="ui fluid image">
+    </div>
+  </div>
+</div>
